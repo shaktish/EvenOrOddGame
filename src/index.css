@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Merriweather', serif;
+}
+
+.App {
+  margin:0 auto;
+  max-width: 600px;
+  text-align: center;
 }
