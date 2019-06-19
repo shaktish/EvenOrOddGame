@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-// ACTION TYPE
-import {StartGame, StopGame} from '../../Redux/ActionType/ActionType';
-
 // ACTION_CREATORS 
 import {FetchDeckOfCardsActionCreators} from '../../Redux/ActionCreators/FetchDeckOfCardsActionCreators'
+import {StartGameActionCreator, StopGameActionCreator} from '../../Redux/ActionCreators/SettingsActionCreator';
 
 // COMPONENTS
 import Instructions from '../Instructions/Instructions';
@@ -14,10 +12,10 @@ import DrawNextCard from '../DrawNextCard/DrawNextCard';
 class Game extends React.Component {
     startGameLocalInit = () => {
         this.props.startGameHelper();  
-        this.props.FetchDeckOfCardsHelpers();      
+        this.props.FetchDeckOfCardsHelper();      
     }
     render() {
-        //console.log(this.props, 'PROPS FROM GAME.JS');
+        // console.log(this.props, 'PROPS FROM GAME.JS');
 
         let gameContent;
 
@@ -38,8 +36,9 @@ class Game extends React.Component {
         }
         return (
             <div>
-                <h2>Evens or Odds</h2>                
-                {this.props.DeckOfCardsHelper.loader ? <div>Loading...</div> : null}
+                <h2>Evens or Odds</h2>   
+                {this.props.DeckOfCardsHelper.ErrorFetchDeckCardsStatus ? <p>Looks like there was a problem in getting cards.  Status Code: {this.props.DeckOfCardsHelper.ErrorFetchDeckCardsMsg} </p>: null}             
+                {this.props.DeckOfCardsHelper.loader &&  !this.props.DeckOfCardsHelper.ErrorFetchDeckCardsStatus ? <div>Loading...</div> : null}
                 {this.props.DeckOfCardsHelper.loader ? null : gameContent }                
             </div>
         );
@@ -57,11 +56,11 @@ const mapStateToProps = (state) => {
 
 const mapDisptachToProps = (dispatch) => {
     return {
-        startGameHelper : () => {dispatch({type:StartGame})},
-        stopGameHelper : () => {dispatch({type:StopGame})},
-        FetchDeckOfCardsHelpers : () => {FetchDeckOfCardsActionCreators(dispatch)}
-    }
-    
+        startGameHelper : () => {dispatch(StartGameActionCreator())},
+        stopGameHelper : () => {dispatch(StopGameActionCreator())},
+        FetchDeckOfCardsHelper : () => {FetchDeckOfCardsActionCreators(dispatch)}
+        //FetchDeckOfCardsHelper : () => {dispatch(FetchDeckOfCardsActionCreators)}
+    }    
 }
 
 const connectorComponent = connect(mapStateToProps, mapDisptachToProps);

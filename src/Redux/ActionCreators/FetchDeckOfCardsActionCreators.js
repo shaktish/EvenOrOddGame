@@ -1,4 +1,4 @@
-import {SuccessFetchDeckCards, /*ErrorFetchDeckCards,*/} from '../ActionType/ActionType';
+import {SuccessFetchDeckCards, ErrorFetchDeckCards} from '../ActionType/ActionType';
 import {apiWrapper} from '../../API/Api';
 
 import {EnableLoaderActionCreator, DisableLoaderActionCreator} from './LoaderActionCreator'
@@ -6,6 +6,13 @@ import {EnableLoaderActionCreator, DisableLoaderActionCreator} from './LoaderAct
 const SuccessFetchDeckOfCardsActionCreator = (data) => {
     return {
         type: SuccessFetchDeckCards,
+        data : data
+    }
+}
+
+const ErrorFetchDeckOfCardsActionCreator = (data) => {
+    return {
+        type: ErrorFetchDeckCards,
         data : data
     }
 }
@@ -19,12 +26,12 @@ export const FetchDeckOfCardsActionCreators = (dispatch) => {
     fetch(apiWrapper)
         .then(response=>{
             if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-                return;
+                console.log('Looks like there was a problem. Status Code: ' + response.status);
+                return dispatch(ErrorFetchDeckOfCardsActionCreator(response.status));
+                
               } else {
                 return response.json().then(data => { 
-                    console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
+                    // console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
                     dispatch(DisableLoaderActionCreator());
                     dispatch(SuccessFetchDeckOfCardsActionCreator(data));                    
                 }) 

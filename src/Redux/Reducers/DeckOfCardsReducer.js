@@ -1,9 +1,10 @@
-import {SuccessFetchDeckCards, EnableLoader, DisableLoader} from '../ActionType/ActionType';
+import {SuccessFetchDeckCards, ErrorFetchDeckCards, EnableLoader, DisableLoader} from '../ActionType/ActionType';
 
 const initState = {
     deck_id : null,
     remaining : 0,
-    loader : false
+    loader : false,
+    ErrorFetchDeckCardsStatus : false,    
 }
 
 const DeckOfCardsReducer = (state = initState, action) => {
@@ -16,6 +17,13 @@ const DeckOfCardsReducer = (state = initState, action) => {
                 remaining,
                 deck_id
             }   
+        case ErrorFetchDeckCards :          
+        console.log('DeckReducerErroeHelper','Are you in \n');
+            return {
+                ...state,    
+                ErrorFetchDeckCardsStatus : true,
+                ErrorFetchDeckCardsMsg : action.data
+            }  
         case EnableLoader :             
             return {
                 ...state,    
