@@ -18,7 +18,6 @@ const DeckOfCardsReducer = (state = initState, action) => {
                 deck_id
             }   
         case ErrorFetchDeckCards :          
-        console.log('DeckReducerErroeHelper','Are you in \n');
             return {
                 ...state,    
                 ErrorFetchDeckCardsStatus : true,

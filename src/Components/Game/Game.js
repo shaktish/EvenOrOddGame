@@ -58,12 +58,12 @@ const mapDisptachToProps = (dispatch) => {
     return {
         startGameHelper : () => {dispatch(StartGameActionCreator())},
         stopGameHelper : () => {dispatch(StopGameActionCreator())},
-        FetchDeckOfCardsHelper : () => {FetchDeckOfCardsActionCreators(dispatch)}
-        //FetchDeckOfCardsHelper : () => {dispatch(FetchDeckOfCardsActionCreators)}
+        //FetchDeckOfCardsHelper : () => {FetchDeckOfCardsActionCreators(dispatch)}
+        FetchDeckOfCardsHelper : () => {dispatch(FetchDeckOfCardsActionCreators())}
     }    
 }
 
 const connectorComponent = connect(mapStateToProps, mapDisptachToProps);
 
 
-export default connectorComponent(Game);
+export default connectorComponent(Game); 

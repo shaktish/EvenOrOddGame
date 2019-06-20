@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 
 const mapDisptachToProps = (dispatch) => {
     return {
-        DrawNextCardHelper : (id) => {FetchNextCardActionCreator(dispatch, id)}
+        DrawNextCardHelper : (id) => {dispatch(FetchNextCardActionCreator(id))}
     }
 }
 const connectorComponent = connect(mapStateToProps, mapDisptachToProps);
