@@ -18,10 +18,9 @@ const ErrorFetchDeckOfCardsActionCreator = (data) => {
 }
 
 
-export const FetchDeckOfCardsActionCreators = (dispatch) => {
-    console.log(dispatch)
+export const FetchDeckOfCardsActionCreators = () => (dispatch) => {
     // INITALIZE LOADER
-    //dispatch(EnableLoaderActionCreator());
+    dispatch(EnableLoaderActionCreator());
 
     // FETCH DECKOFCARDS API
     return fetch(apiWrapper)
@@ -32,7 +31,7 @@ export const FetchDeckOfCardsActionCreators = (dispatch) => {
                 
               } else {
                 return response.json().then(data => { 
-                    console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
+                    //console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
                     dispatch(DisableLoaderActionCreator());
                     return dispatch(SuccessFetchDeckOfCardsActionCreator(data));                    
                 }) 

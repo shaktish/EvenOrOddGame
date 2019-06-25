@@ -1,24 +1,23 @@
 import {drawNextCardApiWrapper} from '../../API/Api';
+import {SuccessNextCardFetchDeckCards} from '../ActionType/ActionType';
 
 const SuccessFetchNextCardActionCreator = (data) => {
-    console.log(data);
+    // console.log(data);
     return {
-        type : 'SuccessNextCardFetchDeckCards',
-        data : data 
+        type : SuccessNextCardFetchDeckCards,
+        payload : data 
     }
-
 }
 
-export const FetchNextCardActionCreator = (dispatch, id) => {
-    fetch(drawNextCardApiWrapper + id + '/draw')
+export const FetchNextCardActionCreator = (id) =>  (dispatch) => {
+    return fetch(drawNextCardApiWrapper + id + '/draw/?count=1')
         .then((response)=>{
-            console.log(response)
             if(response.status !== 200) {
                 console.log('Error', response.status)
             } else {
                 return response.json()
                 .then((json)=>{
-                    dispatch(SuccessFetchNextCardActionCreator(json));
+                    dispatch(SuccessFetchNextCardActionCreator(json));                    
                 })
             }
             

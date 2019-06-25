@@ -1,4 +1,9 @@
-import {SuccessFetchDeckCards, ErrorFetchDeckCards, EnableLoader, DisableLoader} from '../ActionType/ActionType';
+import {
+    SuccessFetchDeckCards,
+    ErrorFetchDeckCards,
+    SuccessNextCardFetchDeckCards,
+    EnableLoader, 
+    DisableLoader} from '../ActionType/ActionType';
 
 const initState = {
     deck_id : null,
@@ -8,13 +13,13 @@ const initState = {
 }
 
 const DeckOfCardsReducer = (state = initState, action) => {
-    
-    switch(action.type) {
+
+    switch(action.type) {    
         case SuccessFetchDeckCards : 
-            const {remaining, deck_id} = action.data;
+        let {deck_id} = action.data;
             return {
                 ...state,    
-                remaining,
+                remaining : action.data.remaining,
                 deck_id
             }   
         case ErrorFetchDeckCards :          
@@ -23,6 +28,13 @@ const DeckOfCardsReducer = (state = initState, action) => {
                 ErrorFetchDeckCardsStatus : true,
                 ErrorFetchDeckCardsMsg : action.data
             }  
+        case SuccessNextCardFetchDeckCards : 
+            let {cards} = action.payload                
+            return {
+                ...state,
+                remaining : action.payload.remaining,
+                cards,
+            }
         case EnableLoader :             
             return {
                 ...state,    
