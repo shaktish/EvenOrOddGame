@@ -10,5 +10,8 @@ export const EnableLoader = 'ENABLE_LOADER';
 export const DisableLoader = 'DISABLE_LOADER';
 export const EvenActionType = 'EVEN';
 export const OddActionType = 'ODD';
-export const GameScoreActionType = 'GAME_SCORE'
+export const GameScoreActionType = 'GAME_SCORE';
+export const DisableBtnIsTrue = 'DISABLE_BTN_IS_TRUE';
+export const DisableBtnIsFalse = 'DISABLE_BTN_IS_FALSE';
+export const ResetScore = 'RESET_SCORE';
 

@@ -1,15 +1,15 @@
 import {
     EvenActionType,
     OddActionType,
-    SuccessNextCardFetchDeckCards
+    SuccessNextCardFetchDeckCards,
+    ResetScore
 
 } from '../ActionType/ActionType';
 
 
 const initState = {
     userChoice : null,
-    score : 0,
-    
+    score : 0,    
 }
     
 const GameStateReducer = (state = initState, action) => {
@@ -26,19 +26,22 @@ const GameStateReducer = (state = initState, action) => {
                 userChoice : 'odd'
             }    
 
-        case SuccessNextCardFetchDeckCards :
-            
-            // console.log(action.payLoad, '\n from gamescore action type');                
+        case SuccessNextCardFetchDeckCards :                
             let cardValueType = window.parseInt(action.payload.cards[0].value, 10) % 2 === 0 ? 'even' : 'odd' ;
-            let updatedScore = state.score;
-
-            if(state.userChoice === cardValueType) {
-                updatedScore += 1;
+            if(state.userChoice === cardValueType) {                
+                return {
+                    ...state,
+                    score : state.score + 1
+                }
+            } else {
+                return state 
             }
+        case  ResetScore : 
             return {
                 ...state,
-                score : updatedScore
-            }   
+                score : 0
+            }        
+               
         default : return state      
     }
 }

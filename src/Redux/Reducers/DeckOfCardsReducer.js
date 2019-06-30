@@ -3,13 +3,16 @@ import {
     ErrorFetchDeckCards,
     SuccessNextCardFetchDeckCards,
     EnableLoader, 
-    DisableLoader} from '../ActionType/ActionType';
+    DisableLoader,
+    DisableBtnIsTrue,
+    DisableBtnIsFalse} from '../ActionType/ActionType';
 
 const initState = {
     deck_id : null,
     remaining : 0,
     loader : false,
     ErrorFetchDeckCardsStatus : false,    
+    btnDisabled : false
 }
 
 const DeckOfCardsReducer = (state = initState, action) => {
@@ -45,6 +48,16 @@ const DeckOfCardsReducer = (state = initState, action) => {
                 ...state,    
                 loader : false
             } 
+        case DisableBtnIsTrue  : 
+            return {
+                ...state,
+                btnDisabled : true
+            }
+        case DisableBtnIsFalse  : 
+            return {
+                ...state,
+                btnDisabled : false
+            }
         default : return state      
     }
 }

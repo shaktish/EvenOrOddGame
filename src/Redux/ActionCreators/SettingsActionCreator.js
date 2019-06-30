@@ -16,7 +16,6 @@ export const StopGameActionCreator = () => {
 export const EvenActiveActionCreator =  () => {
     return {
         type : EvenActionType,
-        payLoad : 'test'
     }
 }
 

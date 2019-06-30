@@ -1,5 +1,5 @@
 import {drawNextCardApiWrapper} from '../../API/Api';
-import {SuccessNextCardFetchDeckCards} from '../ActionType/ActionType';
+import {SuccessNextCardFetchDeckCards, DisableBtnIsTrue, DisableBtnIsFalse} from '../ActionType/ActionType';
 
 const SuccessFetchNextCardActionCreator = (data) => {
     // console.log(data);
@@ -9,7 +9,20 @@ const SuccessFetchNextCardActionCreator = (data) => {
     }
 }
 
+const EnableDrawCardBtn = () => {
+    return {
+        type : DisableBtnIsTrue
+    }
+}
+
+const DisableDrawCardBtn = () => {
+    return {
+        type : DisableBtnIsFalse
+    }
+}
+
 export const FetchNextCardActionCreator = (id) =>  (dispatch) => {
+    dispatch(EnableDrawCardBtn());
     return fetch(drawNextCardApiWrapper + id + '/draw/?count=1')
         .then((response)=>{
             if(response.status !== 200) {
@@ -17,7 +30,8 @@ export const FetchNextCardActionCreator = (id) =>  (dispatch) => {
             } else {
                 return response.json()
                 .then((json)=>{
-                    dispatch(SuccessFetchNextCardActionCreator(json));                    
+                    dispatch(SuccessFetchNextCardActionCreator(json));    
+                    dispatch(DisableDrawCardBtn());                
                 })
             }
             

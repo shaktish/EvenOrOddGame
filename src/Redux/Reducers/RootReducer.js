@@ -7,6 +7,6 @@ import GameStateReducer from './GameStateReducer';
 
 
 
-const RootReducer = combineReducers({GameSettingReducer : GameSettingReducer, DeckOfCardsReducer : DeckOfCardsReducer});
+const RootReducer = combineReducers({GameSettingReducer : GameSettingReducer, DeckOfCardsReducer : DeckOfCardsReducer, GameStateReducer : GameStateReducer});
 
 export default RootReducer;
