@@ -18,12 +18,12 @@ const ErrorFetchDeckOfCardsActionCreator = (data) => {
 }
 
 
-export const FetchDeckOfCardsActionCreators = (dispatch) => {
+export const FetchDeckOfCardsActionCreators = () => (dispatch) => {
     // INITALIZE LOADER
     dispatch(EnableLoaderActionCreator());
 
     // FETCH DECKOFCARDS API
-    fetch(apiWrapper)
+    return fetch(apiWrapper)
         .then(response=>{
             if (response.status !== 200) {
                 console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -31,9 +31,9 @@ export const FetchDeckOfCardsActionCreators = (dispatch) => {
                 
               } else {
                 return response.json().then(data => { 
-                    // console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
+                    //console.log(data, '\n RESPONSE -> FETCH DECK OF CARDS');
                     dispatch(DisableLoaderActionCreator());
-                    dispatch(SuccessFetchDeckOfCardsActionCreator(data));                    
+                    return dispatch(SuccessFetchDeckOfCardsActionCreator(data));                    
                 }) 
               }
               

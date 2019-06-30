@@ -1,29 +1,43 @@
-import {SuccessFetchDeckCards, ErrorFetchDeckCards, EnableLoader, DisableLoader} from '../ActionType/ActionType';
+import {
+    SuccessFetchDeckCards,
+    ErrorFetchDeckCards,
+    SuccessNextCardFetchDeckCards,
+    EnableLoader, 
+    DisableLoader,
+    DisableBtnIsTrue,
+    DisableBtnIsFalse} from '../ActionType/ActionType';
 
 const initState = {
     deck_id : null,
     remaining : 0,
     loader : false,
     ErrorFetchDeckCardsStatus : false,    
+    btnDisabled : false
 }
 
 const DeckOfCardsReducer = (state = initState, action) => {
-    
-    switch(action.type) {
+
+    switch(action.type) {    
         case SuccessFetchDeckCards : 
-            const {remaining, deck_id} = action.data;
+        let {deck_id} = action.data;
             return {
                 ...state,    
-                remaining,
+                remaining : action.data.remaining,
                 deck_id
             }   
         case ErrorFetchDeckCards :          
-        console.log('DeckReducerErroeHelper','Are you in \n');
             return {
                 ...state,    
                 ErrorFetchDeckCardsStatus : true,
                 ErrorFetchDeckCardsMsg : action.data
             }  
+        case SuccessNextCardFetchDeckCards : 
+            let {cards} = action.payload                
+            return {
+                ...state,
+                remaining : action.payload.remaining,
+                cards,
+            }
         case EnableLoader :             
             return {
                 ...state,    
@@ -34,6 +48,16 @@ const DeckOfCardsReducer = (state = initState, action) => {
                 ...state,    
                 loader : false
             } 
+        case DisableBtnIsTrue  : 
+            return {
+                ...state,
+                btnDisabled : true
+            }
+        case DisableBtnIsFalse  : 
+            return {
+                ...state,
+                btnDisabled : false
+            }
         default : return state      
     }
 }

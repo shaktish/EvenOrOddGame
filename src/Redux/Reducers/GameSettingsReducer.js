@@ -1,11 +1,18 @@
-import {StartGame, StopGame, instructionsExpanded, instructionsCollapsed} from '../ActionType/ActionType';
+import {
+    StartGame, 
+    StopGame, 
+    instructionsExpanded, 
+    instructionsCollapsed,
+
+    } from '../ActionType/ActionType';
 
 const initState = {
     gameIsOn : false,
-    instructionsCollapsed : true
+    instructionsCollapsed : true,
 }
 
 const GameSettingsReducer = (state = initState, action) => {
+
     switch(action.type) {
         case StartGame : 
             return {
@@ -26,7 +33,8 @@ const GameSettingsReducer = (state = initState, action) => {
             return {
                 ...state,
                 instructionsCollapsed : true
-            }      
+            }
+              
         default : return state      
     }
 }
